@@ -897,6 +897,8 @@ namespace MailMax
             }
             catch (WebException webex)
             {
+                error("Connection failure. Please try again");
+                Environment.Exit(0);
                 var response = (HttpWebResponse)webex.Response;
                 switch (response.StatusCode)
                 {

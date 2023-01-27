@@ -202,8 +202,9 @@ namespace MailMax
             }
         }
 
-        private void startToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void startToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
             if (lstCampaings.SelectedItems.Count > 0)
             {
 
@@ -220,7 +221,391 @@ namespace MailMax
                 lstCampaings.Items[index].SubItems[2].Text = campaign.State;
                 int indexOfEmail = -1;
                 SMTPServer UsedServer = campaign.SMTPServer;
-                Task.Run(() =>
+
+                var tasks = new List<Task>();
+                CancellationTokenSource source = new CancellationTokenSource();
+                CancellationToken token = source.Token;
+                int threadCount = settings.NumberOfThreads;
+                Console.WriteLine(threadCount);
+                ThreadPool.SetMinThreads(threadCount, 0);
+                ThreadPool.SetMaxThreads(threadCount, 0);
+                TaskFactory factory = new TaskFactory(token);
+                int cntEmails = campaign.Source.Emails.Count;
+                /* 
+                 int threadElements = cntEmails / threadCount;
+                 for (int el = 0; el < threadElements; el++)
+                 {
+                     Thread[] threads = new Thread[threadCount];
+                     for (int i = 0; i < threadCount; i++)
+                     {
+                         var email = campaign.Source.Emails[el * threadCount + i];
+
+                         threads[i] = new Thread(new ThreadStart(() =>
+                         {
+                             campaign.Report.Add(new ReportModel() { Email = email });
+                             indexOfEmail++;
+                             Console.WriteLine(indexOfEmail);
+                             int currentThreadIndex = indexOfEmail;
+                             string MessageError = "";
+                             if (settings.EnableVerification)
+                             {
+                                 if (!ToolsMethods.EmailIsValid(email) || !ToolsMethods.CheckDomain(ToolsMethods.GetDomainFromEmail(email)))
+                                 {
+                                     campaign.Report[currentThreadIndex].ExcludAfterVerification = true;
+                                 }
+                             }
+                             if (!campaign.Report[currentThreadIndex].ExcludAfterVerification)
+                             {
+                                 campaign.Report[currentThreadIndex].Success = ToolsMethods.SendEmail(email, UsedServer, campaign.TheMessage, out MessageError);
+                             }
+                             else
+                             {
+                                 MessageError = "Excluded after verification of format and domain.";
+                             }
+
+                             campaign.Report[currentThreadIndex].ErrorMessage = MessageError;
+                             campaign.Report[currentThreadIndex].Passed = true;
+                             countTotal++;
+                             campaign.EmailSent++;
+                             count++;
+                             if (campaign.SMTPRotation)
+                             {
+
+                                 countRotate++;
+                                 if (campaign.SMTPRotationIntervall < countRotate)
+                                 {
+
+                                     countRotate = 0;
+                                     RotateIndex++;
+
+
+                                     if (RotateIndex > campaign.ServersRotation.Count - 1)
+                                     {
+
+                                         RotateIndex = -1;
+                                         UsedServer = campaign.SMTPServer;
+                                     }
+                                     else
+                                     {
+
+                                         UsedServer = campaign.ServersRotation[RotateIndex];
+                                     }
+
+                                 }
+                             }
+                             lstCampaings.Invoke(new MethodInvoker(delegate
+                             {
+
+                                 lstCampaings.Items[index].SubItems[1].Text = campaign.EmailSent.ToString() + "/" + totalEmails.ToString();
+                             }));
+                             if (count > 5)
+                             {
+
+                                 if (campaigns[index].CancelSending)
+                                 {
+                                     campaigns[index].State = "Stopped";
+                                     campaign = campaigns[index];
+                                     campaign.IsRunning = false;
+                                     lstCampaings.Invoke(new MethodInvoker(delegate
+                                     {
+                                         lstCampaings.Items[index].SubItems[2].Text = campaign.State;
+                                     }));
+
+                                     cntCamaigns.Invoke(new MethodInvoker(delegate
+                                     {
+                                         cntCamaigns.Enabled = true;
+                                     }));
+
+                                     for (int j = 0; j < threadCount; j++)
+                                     {
+                                         if (i != j)
+                                             threads[j].Abort();
+                                     }
+                                 }
+                                 count = 0;
+                             }
+                             if (settings.SecondsBetweenMessages > 0)
+                                 Thread.Sleep(settings.SecondsBetweenMessages * 1000);
+
+                             if (settings.WaitAfterXMessages > 0 && countTotal >= settings.WaitAfterXMessages)
+                             {
+                                 Thread.Sleep(settings.SecondsAfterXMessages * 1000);
+                                 countTotal = 0;
+                             }
+                         }));
+
+
+                     }
+
+                     for (int i = 0; i < threadCount; i++)
+                     {
+                         threads[i].Start();
+                     }
+
+                     for (int i = 0; i < threadCount; i++)
+                     {
+                         threads[i].Join();
+                     }
+                 }
+
+                 for (int i = 0; i < cntEmails - threadCount * threadElements; i++)
+                 {
+                     Thread[] threads_rest = new Thread[i];
+
+                     var email = campaign.Source.Emails[threadCount * threadElements + i];
+
+                     threads_rest[i] = new Thread(new ThreadStart(() =>
+                     {
+                         campaign.Report.Add(new ReportModel() { Email = email });
+                         indexOfEmail++;
+                         Console.WriteLine(indexOfEmail);
+                         int currentThreadIndex = indexOfEmail;
+                         string MessageError = "";
+                         if (settings.EnableVerification)
+                         {
+                             if (!ToolsMethods.EmailIsValid(email) || !ToolsMethods.CheckDomain(ToolsMethods.GetDomainFromEmail(email)))
+                             {
+                                 campaign.Report[currentThreadIndex].ExcludAfterVerification = true;
+                             }
+                         }
+                         if (!campaign.Report[currentThreadIndex].ExcludAfterVerification)
+                         {
+                             campaign.Report[currentThreadIndex].Success = ToolsMethods.SendEmail(email, UsedServer, campaign.TheMessage, out MessageError);
+                         }
+                         else
+                         {
+                             MessageError = "Excluded after verification of format and domain.";
+                         }
+
+                         campaign.Report[currentThreadIndex].ErrorMessage = MessageError;
+                         campaign.Report[currentThreadIndex].Passed = true;
+                         countTotal++;
+                         campaign.EmailSent++;
+                         count++;
+                         if (campaign.SMTPRotation)
+                         {
+
+                             countRotate++;
+                             if (campaign.SMTPRotationIntervall < countRotate)
+                             {
+
+                                 countRotate = 0;
+                                 RotateIndex++;
+
+
+                                 if (RotateIndex > campaign.ServersRotation.Count - 1)
+                                 {
+
+                                     RotateIndex = -1;
+                                     UsedServer = campaign.SMTPServer;
+                                 }
+                                 else
+                                 {
+
+                                     UsedServer = campaign.ServersRotation[RotateIndex];
+                                 }
+
+                             }
+                         }
+                         lstCampaings.Invoke(new MethodInvoker(delegate
+                         {
+
+                             lstCampaings.Items[index].SubItems[1].Text = campaign.EmailSent.ToString() + "/" + totalEmails.ToString();
+                         }));
+                         if (count > 5)
+                         {
+
+                             if (campaigns[index].CancelSending)
+                             {
+                                 campaigns[index].State = "Stopped";
+                                 campaign = campaigns[index];
+                                 campaign.IsRunning = false;
+                                 lstCampaings.Invoke(new MethodInvoker(delegate
+                                 {
+                                     lstCampaings.Items[index].SubItems[2].Text = campaign.State;
+                                 }));
+
+                                 cntCamaigns.Invoke(new MethodInvoker(delegate
+                                 {
+                                     cntCamaigns.Enabled = true;
+                                 }));
+
+                                 for (int j = 0; j < threadCount; j++)
+                                 {
+                                     if (i != j)
+                                         threads_rest[j].Abort();
+                                 }
+                             }
+                             count = 0;
+                         }
+                         if (settings.SecondsBetweenMessages > 0)
+                             Thread.Sleep(settings.SecondsBetweenMessages * 1000);
+
+                         if (settings.WaitAfterXMessages > 0 && countTotal >= settings.WaitAfterXMessages)
+                         {
+                             Thread.Sleep(settings.SecondsAfterXMessages * 1000);
+                             countTotal = 0;
+                         }
+                     }));
+
+                     threads_rest[i].Start(i);
+
+                     for (int k = 0; k < cntEmails - threadCount * threadElements; k++)
+                     {
+                         threads_rest[k].Join();
+                     }
+                 }
+
+                 if (!campaigns[index].CancelSending)
+                     campaign.State = "Finished";
+                 campaign = campaigns[index];
+                 campaign.IsRunning = false;
+                 lstCampaings.Invoke(new MethodInvoker(delegate
+                 {
+                     lstCampaings.Items[index].SubItems[2].Text = campaign.State;
+                 }));
+
+                 cntCamaigns.Invoke(new MethodInvoker(delegate
+                 {
+                     cntCamaigns.Enabled = true;
+                 }));*/
+                foreach (var email in campaign.Source.Emails)
+                {
+                    tasks.Add(factory.StartNew(() =>
+                    {
+                        campaign.Report.Add(new ReportModel() { Email = email });
+                        indexOfEmail++;
+                        int currentThreadIndex = indexOfEmail;
+                        string MessageError = "";
+                        if (settings.EnableVerification)
+                        {
+                            if (!ToolsMethods.EmailIsValid(email) || !ToolsMethods.CheckDomain(ToolsMethods.GetDomainFromEmail(email)))
+                            {
+                                campaign.Report[currentThreadIndex].ExcludAfterVerification = true;
+                            }
+                        }
+                        if (!campaign.Report[currentThreadIndex].ExcludAfterVerification)
+                        {
+                            Console.WriteLine("Sending");
+                            Console.WriteLine(currentThreadIndex);
+                            campaign.Report[currentThreadIndex].Success = ToolsMethods.SendEmail(email, UsedServer, campaign.TheMessage, out MessageError);
+                            Console.WriteLine("Receiving");
+                            Console.WriteLine(currentThreadIndex);
+                        }
+                        else
+                        {
+                            MessageError = "Excluded after verification of format and domain.";
+                        }
+
+                        campaign.Report[currentThreadIndex].ErrorMessage = MessageError;
+                        campaign.Report[currentThreadIndex].Passed = true;
+                        countTotal++;
+                        campaign.EmailSent++;
+                        count++;
+                        if (campaign.SMTPRotation)
+                        {
+
+                            countRotate++;
+                            if (campaign.SMTPRotationIntervall < countRotate)
+                            {
+
+                                countRotate = 0;
+                                RotateIndex++;
+
+
+                                if (RotateIndex > campaign.ServersRotation.Count - 1)
+                                {
+
+                                    RotateIndex = -1;
+                                    UsedServer = campaign.SMTPServer;
+                                }
+                                else
+                                {
+
+                                    UsedServer = campaign.ServersRotation[RotateIndex];
+                                }
+
+                            }
+                        }
+                        lstCampaings.Invoke(new MethodInvoker(delegate
+                        {
+
+                            lstCampaings.Items[index].SubItems[1].Text = campaign.EmailSent.ToString() + "/" + totalEmails.ToString();
+                        }), token);
+                        if (count > 5)
+                        {
+
+                            if (campaigns[index].CancelSending)
+                            {
+                                campaigns[index].State = "Stopped";
+                                campaign = campaigns[index];
+                                campaign.IsRunning = false;
+                                lstCampaings.Invoke(new MethodInvoker(delegate
+                                {
+                                    lstCampaings.Items[index].SubItems[2].Text = campaign.State;
+                                }));
+
+                                cntCamaigns.Invoke(new MethodInvoker(delegate
+                                {
+                                    cntCamaigns.Enabled = true;
+                                }));
+                                source.Cancel();
+                            }
+                            count = 0;
+                        }
+/*                        if (settings.SecondsBetweenMessages > 0)
+                            Thread.Sleep(settings.SecondsBetweenMessages * 1000);*/
+
+/*                        if (settings.WaitAfterXMessages > 0 && countTotal >= settings.WaitAfterXMessages)
+                        {
+                            Thread.Sleep(settings.SecondsAfterXMessages * 1000);
+                            countTotal = 0;
+                        }*/
+                    }));
+                }
+                try
+                {
+                    Task t = factory.ContinueWhenAll(tasks.ToArray(), (results) =>
+                    {
+                        if (!campaigns[index].CancelSending)
+                            campaign.State = "Finished";
+                        campaign = campaigns[index];
+                        campaign.IsRunning = false;
+                        lstCampaings.Invoke(new MethodInvoker(delegate
+                        {
+                            lstCampaings.Items[index].SubItems[2].Text = campaign.State;
+                        }));
+
+                        cntCamaigns.Invoke(new MethodInvoker(delegate
+                        {
+                            cntCamaigns.Enabled = true;
+                        }));
+                    }, token);
+                }
+                catch { };
+
+                //Task t = Task.WhenAll(tasks.ToArray());
+
+                /*                try
+                                {
+                                    await t;
+                                }
+                                catch { }*/
+
+                /*if (!campaigns[index].CancelSending)
+                    campaign.State = "Finished";
+                campaign = campaigns[index];
+                campaign.IsRunning = false;
+                lstCampaings.Invoke(new MethodInvoker(delegate
+                {
+                    lstCampaings.Items[index].SubItems[2].Text = campaign.State;
+                }));
+
+                cntCamaigns.Invoke(new MethodInvoker(delegate
+                {
+                    cntCamaigns.Enabled = true;
+                }));*/
+                /*Task.Run(() =>
                 {
                     foreach (var email in campaign.Source.Emails)
                     {
@@ -297,6 +682,7 @@ namespace MailMax
                             countTotal = 0;
                         }
                     }
+
                     if (!campaigns[index].CancelSending)
                         campaign.State = "Finished";
                     campaign = campaigns[index];
@@ -310,7 +696,7 @@ namespace MailMax
                     {
                         cntCamaigns.Enabled = true;
                     }));
-                });
+                });*/
 
             }
         }
@@ -607,6 +993,7 @@ Thank You<br/>";
             numSecondsWaitAfterXMessages.Value = (int)settings.SecondsAfterXMessages;
             numSecondsBetweenMessages.Value = (int)settings.SecondsBetweenMessages;
             chkEnableVerification.Checked = settings.EnableVerification;
+            numThreads.Value = settings.NumberOfThreads;
             OpenPanel(pnlSettings);
             SelectLabel(lblSettings);
         }
@@ -638,6 +1025,7 @@ Thank You<br/>";
             settings.SecondsBetweenMessages = int.Parse(numSecondsBetweenMessages.Value.ToString());
             settings.SecondsAfterXMessages = int.Parse(numSecondsWaitAfterXMessages.Value.ToString());
             settings.WaitAfterXMessages = int.Parse(numWaitSecondsAfterXMessages.Value.ToString());
+            settings.NumberOfThreads = int.Parse(numThreads.Value.ToString());
             Settings.SaveChanges(settings);
             MessageBox.Show("Changes Saved Successfully !!.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -666,9 +1054,5 @@ Thank You<br/>";
             }
         }
 
-        private void pnlHome_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }

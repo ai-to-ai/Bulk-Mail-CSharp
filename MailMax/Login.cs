@@ -29,16 +29,31 @@ namespace MailMax
         // KeyAuthApp.register("username", "password", "key");
         //KeyAuthApp.login("username", "password"); 
 
+/*        public static api KeyAuthApp ;*/
+        /*public static api KeyAuthApp = new api(
+             name: "mailmax-license",
+             ownerid: "aPdnX3MOWq",
+             secret: "f2142846168652469d39188b72006dcc2d16a87ef8d1f7239c5167fbe772184f",
+             version: "1.0"
+         );*/
+
         public static api KeyAuthApp = new api(
-            name: "mailmax-license",
-            ownerid: "aPdnX3MOWq",
-            secret: "f2142846168652469d39188b72006dcc2d16a87ef8d1f7239c5167fbe772184f",
-            version: "1.0"
-        );
+             name: "mailmax-license",
+             ownerid: "aPdnX3MOWq",
+             secret: "f2142846168652469d39188b72006dcc2d16a87ef8d1f7239c5167fbe772184f",
+             version: "1.0"
+         );
 
         public Login()
         {
             InitializeComponent();
+
+/*            KeyAuthApp = new api(
+            name: "mailmax-license",
+            ownerid: "aPdnX3MOWq",
+            secret: "f2142846168652469d39188b72006dcc2d16a87ef8d1f7239c5167fbe772184f",
+            version: "1.0"
+        );*/
         }
 
         private void siticoneControlBox1_Click(object sender, EventArgs e)
@@ -55,8 +70,13 @@ namespace MailMax
         
         private void Login_Load(object sender, EventArgs e)
         {
-
-            KeyAuthApp.init();
+            try
+            {
+                KeyAuthApp.init();
+            } catch
+            {
+                MessageBox.Show("Please check internet connection.");
+            }
 
             if (KeyAuthApp.response.message == "invalidver")
             {

@@ -99,6 +99,8 @@ namespace MailMax
             this.label34 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.tmrShow = new System.Windows.Forms.Timer(this.components);
+            this.numThreads = new System.Windows.Forms.NumericUpDown();
+            this.label11 = new System.Windows.Forms.Label();
             this.pnlMenu.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -112,6 +114,7 @@ namespace MailMax
             ((System.ComponentModel.ISupportInitialize)(this.numSecondsWaitAfterXMessages)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numWaitSecondsAfterXMessages)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSecondsBetweenMessages)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numThreads)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlMenu
@@ -769,7 +772,6 @@ namespace MailMax
             this.pnlHome.Name = "pnlHome";
             this.pnlHome.Size = new System.Drawing.Size(685, 461);
             this.pnlHome.TabIndex = 11;
-            this.pnlHome.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlHome_Paint);
             // 
             // label29
             // 
@@ -808,6 +810,8 @@ namespace MailMax
             // 
             // pnlSettings
             // 
+            this.pnlSettings.Controls.Add(this.numThreads);
+            this.pnlSettings.Controls.Add(this.label11);
             this.pnlSettings.Controls.Add(this.chkEnableVerification);
             this.pnlSettings.Controls.Add(this.label10);
             this.pnlSettings.Controls.Add(this.numSecondsWaitAfterXMessages);
@@ -819,7 +823,7 @@ namespace MailMax
             this.pnlSettings.Controls.Add(this.label5);
             this.pnlSettings.Controls.Add(this.label34);
             this.pnlSettings.Controls.Add(this.button3);
-            this.pnlSettings.Location = new System.Drawing.Point(230, 77);
+            this.pnlSettings.Location = new System.Drawing.Point(221, 61);
             this.pnlSettings.Name = "pnlSettings";
             this.pnlSettings.Size = new System.Drawing.Size(685, 461);
             this.pnlSettings.TabIndex = 12;
@@ -984,6 +988,37 @@ namespace MailMax
             this.tmrShow.Interval = 20;
             this.tmrShow.Tick += new System.EventHandler(this.tmrShow_Tick);
             // 
+            // numThreads
+            // 
+            this.numThreads.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(75)))), ((int)(((byte)(109)))));
+            this.numThreads.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numThreads.ForeColor = System.Drawing.Color.White;
+            this.numThreads.Location = new System.Drawing.Point(188, 292);
+            this.numThreads.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numThreads.Name = "numThreads";
+            this.numThreads.Size = new System.Drawing.Size(110, 24);
+            this.numThreads.TabIndex = 48;
+            this.numThreads.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.BackColor = System.Drawing.Color.Transparent;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(36, 296);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(140, 18);
+            this.label11.TabIndex = 47;
+            this.label11.Text = "Number of Threads:";
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -994,9 +1029,9 @@ namespace MailMax
             this.Controls.Add(this.pnlMenu);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.pnlEmailAutomation);
-            this.Controls.Add(this.pnlSettings);
             this.Controls.Add(this.pnlSmtpTester);
             this.Controls.Add(this.pnlHome);
+            this.Controls.Add(this.pnlSettings);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1025,6 +1060,7 @@ namespace MailMax
             ((System.ComponentModel.ISupportInitialize)(this.numSecondsWaitAfterXMessages)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numWaitSecondsAfterXMessages)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSecondsBetweenMessages)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numThreads)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1099,6 +1135,8 @@ namespace MailMax
         private System.Windows.Forms.CheckBox chkEnableVerification;
         private System.Windows.Forms.ToolStripMenuItem viewReportToolStripMenuItem;
         private System.Windows.Forms.Timer tmrShow;
+        private System.Windows.Forms.NumericUpDown numThreads;
+        private System.Windows.Forms.Label label11;
     }
 }
 

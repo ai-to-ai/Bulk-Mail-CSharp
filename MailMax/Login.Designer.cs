@@ -27,7 +27,6 @@ namespace MailMax
             this.key = new Siticone.UI.WinForms.SiticoneRoundedTextBox();
             this.username = new Siticone.UI.WinForms.SiticoneRoundedTextBox();
             this.password = new Siticone.UI.WinForms.SiticoneRoundedTextBox();
-            this.RgstrBtn = new Siticone.UI.WinForms.SiticoneRoundedButton();
             this.UpgradeBtn = new Siticone.UI.WinForms.SiticoneRoundedButton();
             this.LicBtn = new Siticone.UI.WinForms.SiticoneRoundedButton();
             this.status = new Siticone.UI.WinForms.SiticoneLabel();
@@ -102,7 +101,7 @@ namespace MailMax
             this.LoginBtn.ForeColor = System.Drawing.Color.White;
             this.LoginBtn.HoveredState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
             this.LoginBtn.HoveredState.Parent = this.LoginBtn;
-            this.LoginBtn.Location = new System.Drawing.Point(12, 167);
+            this.LoginBtn.Location = new System.Drawing.Point(91, 167);
             this.LoginBtn.Name = "LoginBtn";
             this.LoginBtn.ShadowDecoration.Parent = this.LoginBtn;
             this.LoginBtn.Size = new System.Drawing.Size(151, 27);
@@ -192,25 +191,6 @@ namespace MailMax
             this.password.TabIndex = 34;
             this.password.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // RgstrBtn
-            // 
-            this.RgstrBtn.BorderColor = System.Drawing.Color.DodgerBlue;
-            this.RgstrBtn.BorderThickness = 1;
-            this.RgstrBtn.CheckedState.Parent = this.RgstrBtn;
-            this.RgstrBtn.CustomImages.Parent = this.RgstrBtn;
-            this.RgstrBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(127)))), ((int)(((byte)(243)))));
-            this.RgstrBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RgstrBtn.ForeColor = System.Drawing.Color.White;
-            this.RgstrBtn.HoveredState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
-            this.RgstrBtn.HoveredState.Parent = this.RgstrBtn;
-            this.RgstrBtn.Location = new System.Drawing.Point(169, 167);
-            this.RgstrBtn.Name = "RgstrBtn";
-            this.RgstrBtn.ShadowDecoration.Parent = this.RgstrBtn;
-            this.RgstrBtn.Size = new System.Drawing.Size(153, 27);
-            this.RgstrBtn.TabIndex = 35;
-            this.RgstrBtn.Text = "Register";
-            this.RgstrBtn.Click += new System.EventHandler(this.RgstrBtn_Click);
-            // 
             // UpgradeBtn
             // 
             this.UpgradeBtn.BorderColor = System.Drawing.Color.DodgerBlue;
@@ -290,7 +270,6 @@ namespace MailMax
             this.Controls.Add(this.status);
             this.Controls.Add(this.LicBtn);
             this.Controls.Add(this.UpgradeBtn);
-            this.Controls.Add(this.RgstrBtn);
             this.Controls.Add(this.password);
             this.Controls.Add(this.username);
             this.Controls.Add(this.key);
@@ -332,7 +311,6 @@ namespace MailMax
         private Siticone.UI.WinForms.SiticoneRoundedTextBox username;
         private Siticone.UI.WinForms.SiticoneRoundedButton LicBtn;
         private Siticone.UI.WinForms.SiticoneRoundedButton UpgradeBtn;
-        private Siticone.UI.WinForms.SiticoneRoundedButton RgstrBtn;
         private Siticone.UI.WinForms.SiticoneLabel status;
         private Siticone.UI.WinForms.SiticoneLabel siticoneLabel1;
     }

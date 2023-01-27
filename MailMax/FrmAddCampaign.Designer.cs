@@ -55,9 +55,12 @@ namespace MailMax
             this.button2 = new System.Windows.Forms.Button();
             this.lblServers = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.numThread = new System.Windows.Forms.NumericUpDown();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numrotate)).BeginInit();
             this.pnlRotate.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numThread)).BeginInit();
             this.SuspendLayout();
             // 
             // panel2
@@ -319,6 +322,8 @@ namespace MailMax
             // pnlRotate
             // 
             this.pnlRotate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlRotate.Controls.Add(this.textBox1);
+            this.pnlRotate.Controls.Add(this.numThread);
             this.pnlRotate.Controls.Add(this.button2);
             this.pnlRotate.Controls.Add(this.lblServers);
             this.pnlRotate.Controls.Add(this.label9);
@@ -336,7 +341,7 @@ namespace MailMax
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(173, 28);
+            this.button2.Location = new System.Drawing.Point(172, 10);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 28);
             this.button2.TabIndex = 48;
@@ -349,7 +354,7 @@ namespace MailMax
             this.lblServers.AutoSize = true;
             this.lblServers.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblServers.ForeColor = System.Drawing.Color.White;
-            this.lblServers.Location = new System.Drawing.Point(90, 31);
+            this.lblServers.Location = new System.Drawing.Point(89, 13);
             this.lblServers.Name = "lblServers";
             this.lblServers.Size = new System.Drawing.Size(61, 18);
             this.lblServers.TabIndex = 47;
@@ -360,11 +365,36 @@ namespace MailMax
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(21, 32);
+            this.label9.Location = new System.Drawing.Point(20, 14);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(67, 18);
             this.label9.TabIndex = 46;
             this.label9.Text = "Servers :";
+            // 
+            // numThread
+            // 
+            this.numThread.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(75)))), ((int)(((byte)(109)))));
+            this.numThread.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numThread.ForeColor = System.Drawing.Color.AliceBlue;
+            this.numThread.Location = new System.Drawing.Point(127, 48);
+            this.numThread.Name = "numThread";
+            this.numThread.Size = new System.Drawing.Size(120, 26);
+            this.numThread.TabIndex = 49;
+            this.numThread.Visible = false;
+            // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(75)))), ((int)(((byte)(109)))));
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.ForeColor = System.Drawing.Color.White;
+            this.textBox1.Location = new System.Drawing.Point(23, 50);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 19);
+            this.textBox1.TabIndex = 50;
+            this.textBox1.Text = "Threads";
+            this.textBox1.Visible = false;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // FrmAddCampaign
             // 
@@ -397,6 +427,7 @@ namespace MailMax
             ((System.ComponentModel.ISupportInitialize)(this.numrotate)).EndInit();
             this.pnlRotate.ResumeLayout(false);
             this.pnlRotate.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numThread)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -428,5 +459,7 @@ namespace MailMax
         private System.Windows.Forms.Label lblServers;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.NumericUpDown numThread;
     }
 }

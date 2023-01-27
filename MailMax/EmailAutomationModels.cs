@@ -176,6 +176,7 @@ namespace MailMax
         public int SecondsAfterXMessages { get; set; }
         public int WaitAfterXMessages { get; set; }
         public bool EnableVerification { get; set; }
+        public int NumberOfThreads { get; set; }
 
         public static void SaveChanges(Settings settings)
         {
@@ -187,7 +188,7 @@ namespace MailMax
         }
         public static Settings LoadSettings()
         {
-            Settings item = new Settings() { EnableVerification=true, SecondsBetweenMessages = 1, WaitAfterXMessages = 3, SecondsAfterXMessages = 100 };
+            Settings item = new Settings() { EnableVerification=true, SecondsBetweenMessages = 1, WaitAfterXMessages = 3, SecondsAfterXMessages = 100, NumberOfThreads = 15 };
             string Path = Application.StartupPath + "\\settings.bin";
             if (!File.Exists(Path))
                 return item;

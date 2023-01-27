@@ -23,7 +23,6 @@ E:\1212_Barbados_Python_SMTP_Checker\MailMax0\MailMax\bin\Release\MailMax.exe.co
 E:\1212_Barbados_Python_SMTP_Checker\MailMax0\MailMax\bin\Release\MailMax.exe
 E:\1212_Barbados_Python_SMTP_Checker\MailMax0\MailMax\bin\Release\MailMax.pdb
 E:\1212_Barbados_Python_SMTP_Checker\MailMax0\MailMax\bin\Release\Siticone.UI.dll
-E:\1212_Barbados_Python_SMTP_Checker\MailMax0\MailMax\obj\Release\MailMax.csproj.AssemblyReference.cache
 E:\1212_Barbados_Python_SMTP_Checker\MailMax0\MailMax\obj\Release\MailMax.FrmAddCampaign.resources
 E:\1212_Barbados_Python_SMTP_Checker\MailMax0\MailMax\obj\Release\MailMax.FrmAddNewMessage.resources
 E:\1212_Barbados_Python_SMTP_Checker\MailMax0\MailMax\obj\Release\MailMax.FrmAddNewSMTP.resources
@@ -43,3 +42,4 @@ E:\1212_Barbados_Python_SMTP_Checker\MailMax0\MailMax\obj\Release\MailMax.csproj
 E:\1212_Barbados_Python_SMTP_Checker\MailMax0\MailMax\obj\Release\MailMax.csproj.CopyComplete
 E:\1212_Barbados_Python_SMTP_Checker\MailMax0\MailMax\obj\Release\MailMax.exe
 E:\1212_Barbados_Python_SMTP_Checker\MailMax0\MailMax\obj\Release\MailMax.pdb
+E:\1212_Barbados_Python_SMTP_Checker\MailMax0\MailMax\obj\Release\MailMax.csproj.AssemblyReference.cache
