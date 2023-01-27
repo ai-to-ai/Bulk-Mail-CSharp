@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31402.337
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailMax", "MailMax\MailMax.csproj", "{0211FBBB-8180-4388-A04B-2A4C80F2F055}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smtpzone", "MailMax\Smtpzone.csproj", "{0211FBBB-8180-4388-A04B-2A4C80F2F055}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

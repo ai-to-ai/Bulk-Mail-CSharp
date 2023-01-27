@@ -7,7 +7,7 @@
     <ProjectGuid>{0211FBBB-8180-4388-A04B-2A4C80F2F055}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>MailMax</RootNamespace>
-    <AssemblyName>MailMax</AssemblyName>
+    <AssemblyName>Smtpzone</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

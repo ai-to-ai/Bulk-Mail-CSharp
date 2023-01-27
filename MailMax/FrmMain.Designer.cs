@@ -87,6 +87,8 @@ namespace MailMax
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label30 = new System.Windows.Forms.Label();
             this.pnlSettings = new System.Windows.Forms.Panel();
+            this.numThreads = new System.Windows.Forms.NumericUpDown();
+            this.label11 = new System.Windows.Forms.Label();
             this.chkEnableVerification = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
             this.numSecondsWaitAfterXMessages = new System.Windows.Forms.NumericUpDown();
@@ -99,8 +101,6 @@ namespace MailMax
             this.label34 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.tmrShow = new System.Windows.Forms.Timer(this.components);
-            this.numThreads = new System.Windows.Forms.NumericUpDown();
-            this.label11 = new System.Windows.Forms.Label();
             this.pnlMenu.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -111,10 +111,10 @@ namespace MailMax
             this.pnlHome.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnlSettings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numThreads)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSecondsWaitAfterXMessages)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numWaitSecondsAfterXMessages)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSecondsBetweenMessages)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numThreads)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlMenu
@@ -302,7 +302,7 @@ namespace MailMax
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(213, 55);
             this.label1.TabIndex = 0;
-            this.label1.Text = "MailMax";
+            this.label1.Text = "Smtpzone";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlEmailAutomation
@@ -782,8 +782,8 @@ namespace MailMax
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(602, 116);
             this.label29.TabIndex = 35;
-            this.label29.Text = "Welcome to MailMax, The most Advanced Email Bulk Sender with incredible features " +
-    "and options.";
+            this.label29.Text = "Welcome to Smtpzone, The most Advanced Email Bulk Sender with incredible features" +
+    " and options.";
             this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pictureBox1
@@ -804,9 +804,9 @@ namespace MailMax
             this.label30.ForeColor = System.Drawing.Color.White;
             this.label30.Location = new System.Drawing.Point(166, 263);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(338, 24);
+            this.label30.Size = new System.Drawing.Size(353, 24);
             this.label30.TabIndex = 33;
-            this.label30.Text = "MailMax : Advanced Bulk Email Sender";
+            this.label30.Text = "Smtpzone : Advanced Bulk Email Sender";
             // 
             // pnlSettings
             // 
@@ -828,6 +828,37 @@ namespace MailMax
             this.pnlSettings.Size = new System.Drawing.Size(685, 461);
             this.pnlSettings.TabIndex = 12;
             this.pnlSettings.Visible = false;
+            // 
+            // numThreads
+            // 
+            this.numThreads.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(75)))), ((int)(((byte)(109)))));
+            this.numThreads.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numThreads.ForeColor = System.Drawing.Color.White;
+            this.numThreads.Location = new System.Drawing.Point(188, 292);
+            this.numThreads.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numThreads.Name = "numThreads";
+            this.numThreads.Size = new System.Drawing.Size(110, 24);
+            this.numThreads.TabIndex = 48;
+            this.numThreads.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.BackColor = System.Drawing.Color.Transparent;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(36, 296);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(140, 18);
+            this.label11.TabIndex = 47;
+            this.label11.Text = "Number of Threads:";
             // 
             // chkEnableVerification
             // 
@@ -988,37 +1019,6 @@ namespace MailMax
             this.tmrShow.Interval = 20;
             this.tmrShow.Tick += new System.EventHandler(this.tmrShow_Tick);
             // 
-            // numThreads
-            // 
-            this.numThreads.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(75)))), ((int)(((byte)(109)))));
-            this.numThreads.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numThreads.ForeColor = System.Drawing.Color.White;
-            this.numThreads.Location = new System.Drawing.Point(188, 292);
-            this.numThreads.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.numThreads.Name = "numThreads";
-            this.numThreads.Size = new System.Drawing.Size(110, 24);
-            this.numThreads.TabIndex = 48;
-            this.numThreads.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.BackColor = System.Drawing.Color.Transparent;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(36, 296);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(140, 18);
-            this.label11.TabIndex = 47;
-            this.label11.Text = "Number of Threads:";
-            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1030,8 +1030,8 @@ namespace MailMax
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.pnlEmailAutomation);
             this.Controls.Add(this.pnlSmtpTester);
-            this.Controls.Add(this.pnlHome);
             this.Controls.Add(this.pnlSettings);
+            this.Controls.Add(this.pnlHome);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1057,10 +1057,10 @@ namespace MailMax
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.pnlSettings.ResumeLayout(false);
             this.pnlSettings.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numThreads)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSecondsWaitAfterXMessages)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numWaitSecondsAfterXMessages)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSecondsBetweenMessages)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numThreads)).EndInit();
             this.ResumeLayout(false);
 
         }
